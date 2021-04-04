@@ -23,6 +23,8 @@ export class GenericTableComponent implements AfterViewInit {
 
 
   public searchEvent(event: any, column: HtmlTableColumnSettings): void {
+    if(!column.allowFiltering) return;
+
     //enter code
     if (event.keyCode === 13) {
       event.preventDefault();
@@ -33,7 +35,7 @@ export class GenericTableComponent implements AfterViewInit {
   public columnClick(column: HtmlTableColumnSettings): void {
     if (!column.allowSorting) return;
 
-    if (column.sortingType === SortingType.None)
+    if (column.sortingType === SortingType.None || column.sortingType === undefined || column.sortingType === null)
       column.sortingType = SortingType.Ascending;
     else if (column.sortingType === SortingType.Ascending)
       column.sortingType = SortingType.Descending;

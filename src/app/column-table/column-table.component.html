@@ -1,7 +1,11 @@
-<div *ngIf="column.templateName === 'rowNumberTemplate'">
+<div *ngIf="column.templateName === 'rowNumberTemplate'" class="number">
     {{ rowIndex + 1 }}
 </div>
 
 <div *ngIf="column.templateName === 'textTemplate'">
+    {{ data[column.dataPropName] }}
+</div>
+
+<div *ngIf="column.templateName === 'numberTemplate'" class="number">
     {{ data[column.dataPropName] }}
 </div>

@@ -1,8 +1,9 @@
+import { CellTemplateTypes } from "../column-table/column-table.component";
 import { TableColumnSettings } from "../table-infrastructure/column/models/column-settings.model";
 import { BaseTableSetttingsService } from "../table-infrastructure/services/base-table-settings.service";
 
-enum StudentdColumnKey {
-  Number = "number",
+enum StudentsTableColumnKey {
+  RowNumber = "number",
   Country = "country",
   Name = "name",
   Gender = "gender",
@@ -11,10 +12,10 @@ enum StudentdColumnKey {
 export class StudentsTableSettings extends BaseTableSetttingsService {
   protected getOrderedColumnKeys(): string[] {
     let columnKeys = [
-        StudentdColumnKey.Number,
-        StudentdColumnKey.Name,
-        StudentdColumnKey.Gender,
-        StudentdColumnKey.Country,
+        StudentsTableColumnKey.RowNumber,
+        StudentsTableColumnKey.Name,
+        StudentsTableColumnKey.Gender,
+        StudentsTableColumnKey.Country,
     ];
 
     return columnKeys;
@@ -23,30 +24,29 @@ export class StudentsTableSettings extends BaseTableSetttingsService {
   protected getColumnSettings(): TableColumnSettings[] {
     let columnSettings =[
         {
-            key: StudentdColumnKey.Number,
+            key: StudentsTableColumnKey.RowNumber,
             title : "No", 
-            dataPropName : "",
-            templateName: "rowNumberTemplate",
+            templateName: CellTemplateTypes.RowNumber,
             width: "20px",
             allowSorting: false,
         } as TableColumnSettings,
         {
-            key: StudentdColumnKey.Name,
+            key: StudentsTableColumnKey.Name,
             title : "Name", 
             dataPropName : "name",
-            templateName: "textTemplate",
+            templateName: CellTemplateTypes.Text,
         } as TableColumnSettings,
         {
-            key: StudentdColumnKey.Gender,
+            key: StudentsTableColumnKey.Gender,
             title : "Gender", 
             dataPropName : "gender",
-            templateName: "textTemplate",
+            templateName: CellTemplateTypes.Text,
         } as TableColumnSettings,
         {
-            key: StudentdColumnKey.Country,
+            key: StudentsTableColumnKey.Country,
             title : "Country", 
             dataPropName : "country",
-            templateName: "textTemplate",
+            templateName: CellTemplateTypes.Text,
         } as TableColumnSettings,
     ];
 

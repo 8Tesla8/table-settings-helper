@@ -23,3 +23,9 @@ export class ColumnTableComponent implements OnInit {
   }
 
 }
+
+export enum CellTemplateTypes {
+  RowNumber = "rowNumberTemplate",
+  Text = "textTemplate",
+  Number = "numberTemplate",
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ElementsTableSettings } from "./services/elements-table-settings.service";
 import { StudentsTableSettings } from "./services/students-table-settings.service";
 
 @Component({
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
   }
 
   public studentsTableSettings = new StudentsTableSettings();
-  public elementsTableSettings = new StudentsTableSettings();
+  public elementsTableSettings = new ElementsTableSettings();
 
 
   public students = [
