@@ -3,7 +3,7 @@
     <th *ngFor="let column of tableSettings.getTableColumnSettings()"
     [ngStyle]="{'width':column.width}"
     > 
-      <div (click)="columnClick(column)">
+      <div (click)="columnClick(column)" [ngStyle]="{'margin-top':titleMargin(column)}">
         {{column.title}} 
 
         <span *ngIf="column.sortingType ===  'asc'"> ▲</span>

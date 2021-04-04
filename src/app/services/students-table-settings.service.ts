@@ -1,5 +1,7 @@
 import { CellTemplateTypes } from "../column-table/column-table.component";
 import { TableColumnSettings } from "../table-infrastructure/column/models/column-settings.model";
+import { TableColumnFilterSettings } from "../table-infrastructure/filter/models/filter-column-settings.model";
+import { FilterOptionsTypeList } from "../table-infrastructure/filter/models/filter-options.model";
 import { BaseTableSetttingsService } from "../table-infrastructure/services/base-table-settings.service";
 
 enum StudentsTableColumnKey {
@@ -52,4 +54,20 @@ export class StudentsTableSettings extends BaseTableSetttingsService {
 
     return columnSettings;
   }
+
+  protected getFilterColumnSettings() : TableColumnFilterSettings[] {
+    let filterColumnSettings = [
+        {
+            key: StudentsTableColumnKey.Name,
+            filterOptionsList: FilterOptionsTypeList.StringShort,
+        } as TableColumnFilterSettings,
+        {
+            key: StudentsTableColumnKey.Country,
+            filterOptionsList: FilterOptionsTypeList.StringShort,
+        } as TableColumnFilterSettings,
+    ];
+
+    return filterColumnSettings;
+}
+
 }

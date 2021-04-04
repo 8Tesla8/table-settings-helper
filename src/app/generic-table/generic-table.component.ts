@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output } from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from "@angular/core";
 import { HtmlTableColumnSettings } from "../table-infrastructure/column/models/column-settings.model";
 import { SortingType } from "../table-infrastructure/column/models/first-sorting-settings.model";
 import { BaseTableSetttingsService } from "../table-infrastructure/services/base-table-settings.service";
@@ -21,9 +27,14 @@ export class GenericTableComponent implements AfterViewInit {
   @Output()
   public onFilterChange = new EventEmitter<HtmlTableColumnSettings>();
 
+  public titleMargin(column: HtmlTableColumnSettings): string {
+    if (this.tableSettings.showFilterRow() && !column.allowFiltering) {
+      return "-19px";
+    }
+  }
 
   public searchEvent(event: any, column: HtmlTableColumnSettings): void {
-    if(!column.allowFiltering) return;
+    if (!column.allowFiltering) return;
 
     //enter code
     if (event.keyCode === 13) {
@@ -35,7 +46,11 @@ export class GenericTableComponent implements AfterViewInit {
   public columnClick(column: HtmlTableColumnSettings): void {
     if (!column.allowSorting) return;
 
-    if (column.sortingType === SortingType.None || column.sortingType === undefined || column.sortingType === null)
+    if (
+      column.sortingType === SortingType.None ||
+      column.sortingType === undefined ||
+      column.sortingType === null
+    )
       column.sortingType = SortingType.Ascending;
     else if (column.sortingType === SortingType.Ascending)
       column.sortingType = SortingType.Descending;
