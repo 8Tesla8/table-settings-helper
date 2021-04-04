@@ -1,10 +1,10 @@
-import { DevExtremTableColumnSettings, TableColumnSettings } from "../column/models/column-settings.model";
+import { HtmlTableColumnSettings, TableColumnSettings } from "../column/models/column-settings.model";
 import { FirstSortingSettings } from "../column/models/first-sorting-settings.model";
 import { ColumnBuilderService } from "../column/service/column-builder.service";
 import { TableColumnFilterSettings } from "../filter/models/filter-column-settings.model";
 
 export abstract class BaseTableSetttingsService {
-    private columnSettings: DevExtremTableColumnSettings[];
+    private columnSettings: HtmlTableColumnSettings[];
     private columnBuilderService = new ColumnBuilderService();
 
     //methods for override
@@ -31,7 +31,7 @@ export abstract class BaseTableSetttingsService {
         );
     }
 
-    public getTableColumnSettings(): DevExtremTableColumnSettings[] {
+    public getTableColumnSettings(): HtmlTableColumnSettings[] {
         return this.columnSettings;
     }
 

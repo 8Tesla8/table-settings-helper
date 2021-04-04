@@ -1,6 +1,6 @@
 import { TableColumnFilterSettings } from "../../filter/models/filter-column-settings.model";
 import { TableFilterOptions } from "../../filter/services/table-filter-options.service";
-import { DevExtremTableColumnSettings, TableColumnSettings } from "../models/column-settings.model";
+import { HtmlTableColumnSettings, TableColumnSettings } from "../models/column-settings.model";
 import { FirstSortingSettings } from "../models/first-sorting-settings.model";
 
 export class ColumnBuilderService {
@@ -18,7 +18,7 @@ export class ColumnBuilderService {
         allColumnSettings: TableColumnSettings[],
         sortOptions: FirstSortingSettings,
         filterColumnSettings: TableColumnFilterSettings[]
-    ): DevExtremTableColumnSettings[] {
+    ): HtmlTableColumnSettings[] {
         let columnSettingMap = this.createColumnSettingsMap(allColumnSettings);
         let columnFilterSettingsMap = this.createColumnFilterSettingsMap(
             filterColumnSettings
@@ -38,15 +38,15 @@ export class ColumnBuilderService {
 
     private createColumnSettingsMap(
         columnSettings: TableColumnSettings[]
-    ): Map<string, DevExtremTableColumnSettings> {
-        let map = new Map<string, DevExtremTableColumnSettings>();
+    ): Map<string, HtmlTableColumnSettings> {
+        let map = new Map<string, HtmlTableColumnSettings>();
 
         columnSettings.forEach((columnSetting) => {
             let key = columnSetting.key;
 
             if (!map.has(key)) {
                 let column = Object.assign(
-                    new DevExtremTableColumnSettings(),
+                    new HtmlTableColumnSettings(),
                     columnSetting
                 );
                 column.allowFiltering = false;
@@ -81,8 +81,8 @@ export class ColumnBuilderService {
 
     private createTableColumns(
         orderedColumnKeys: string[],
-        columnsMap: Map<string, DevExtremTableColumnSettings>
-    ): DevExtremTableColumnSettings[] {
+        columnsMap: Map<string, HtmlTableColumnSettings>
+    ): HtmlTableColumnSettings[] {
         let columns = [];
 
         orderedColumnKeys.forEach((key) => {
@@ -100,7 +100,7 @@ export class ColumnBuilderService {
     }
 
     private setSortingSettings(
-        columns: DevExtremTableColumnSettings[],
+        columns: HtmlTableColumnSettings[],
         sortOptions: FirstSortingSettings
     ): void {
         columns.forEach((column) => {
@@ -113,7 +113,7 @@ export class ColumnBuilderService {
     }
 
     private setColumnFilterOptins(
-        columns: DevExtremTableColumnSettings[],
+        columns: HtmlTableColumnSettings[],
         columnFilterSettingsMap: Map<string, TableColumnFilterSettings>
     ): void {
         columns.forEach((column)=> {

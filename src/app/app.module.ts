@@ -3,14 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { FormsModule } from "@angular/forms";
+import { ColumnTableComponent } from './column-table/column-table.component';
+import { GenericTableComponent } from './generic-table/generic-table.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ColumnTableComponent,
+    GenericTableComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
