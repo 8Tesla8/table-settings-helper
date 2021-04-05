@@ -17,11 +17,3 @@ export class HtmlTableColumnSettings extends TableColumnSettings {
     public filterOptions: string[];
     public filterText: string;
 }
-
-export enum ColumnDataType {
-    Number = 'number',
-    Boolean = 'boolean',
-    String = 'string',
-    Date = 'date',
-    Datetime ='datetime',
-}
