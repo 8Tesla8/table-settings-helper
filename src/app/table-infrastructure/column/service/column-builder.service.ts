@@ -17,12 +17,17 @@ export class ColumnBuilderService {
         orderedColumnKeys: string[],
         allColumnSettings: TableColumnSettings[],
         sortOptions: FirstSortingSettings,
-        filterColumnSettings: TableColumnFilterSettings[]
+        filterColumnSettings: TableColumnFilterSettings[],
+        allowDuplicateColumn: boolean
     ): HtmlTableColumnSettings[] {
         let columnSettingMap = this.createColumnSettingsMap(allColumnSettings);
         let columnFilterSettingsMap = this.createColumnFilterSettingsMap(
             filterColumnSettings
         );
+
+        if(allowDuplicateColumn === false) {
+            this.checkOrderedColumnsOnDuplicates(orderedColumnKeys);
+        }   
 
         let columns = this.createTableColumns(
             orderedColumnKeys,
@@ -35,11 +40,37 @@ export class ColumnBuilderService {
         return columns;
     }
 
+    private checkOrderedColumnsOnDuplicates(orderedColumnKeys:string[]):void{
+        let map = new Map<string, string>();
+
+        let duplicateKeys = "";
+
+        orderedColumnKeys.forEach((key) => {
+
+            if (map.has(key)){
+                duplicateKeys += key + ",";
+            }
+            else {
+                map.set(key, key);
+            }
+
+        });
+
+        if(duplicateKeys !== ""){
+            throw (
+                "Found duplicate in collection OrderedColumnKeys. Key:" +
+                duplicateKeys +
+                '. Set alloDuplicate(s) true or remove key from the collection.'
+            );
+        }
+    }
 
     private createColumnSettingsMap(
         columnSettings: TableColumnSettings[]
     ): Map<string, HtmlTableColumnSettings> {
         let map = new Map<string, HtmlTableColumnSettings>();
+
+        let duplicateKeys = "";
 
         columnSettings.forEach((columnSetting) => {
             let key = columnSetting.key;
@@ -52,12 +83,19 @@ export class ColumnBuilderService {
                 column.allowFiltering = false;
 
                 map.set(key, column);
-            } else
-                throw new Error(
-                    'TableColumnSettings[] already has a key:' + key
-                );
+            }
+            else {
+                duplicateKeys += key + ', ';
+            }
+
         });
 
+        if(duplicateKeys !== ""){
+            throw new Error(
+                'Collection TableColumnSettings[] contains duplicate key(s):' + duplicateKeys
+            );
+        }
+        
         return map;
     }
 
@@ -66,15 +104,25 @@ export class ColumnBuilderService {
     ): Map<string, TableColumnFilterSettings> {
         let map = new Map<string, TableColumnFilterSettings>();
 
-        filterColumnSettings.forEach((filterSettings) => {
-            var key = filterSettings.key;
+        let duplicateKeys = "";
 
-            if (!map.has(key)) map.set(key, filterSettings);
-            else
-                throw new Error(
-                    'TableColumnFilterSettings[] already has a key:' + key
-                );
+        filterColumnSettings.forEach((filterSettings) => {
+            let key = filterSettings.key;
+
+            if (!map.has(key)) {
+                map.set(key, filterSettings);
+            }
+            else{
+                duplicateKeys += key + ', ';               
+            }
+
         });
+
+        if(duplicateKeys !== ""){
+            throw new Error(
+                'Collectuion TableColumnFilterSettings[] contains duplicate key(s):' + duplicateKeys
+            );                
+        }
 
         return map;
     }
@@ -85,16 +133,24 @@ export class ColumnBuilderService {
     ): HtmlTableColumnSettings[] {
         let columns = [];
 
-        orderedColumnKeys.forEach((key) => {
-            if (!columnsMap.has(key))
-                throw (
-                    'Can not create column with key:' +
-                    key +
-                    ', add TableColumnSettings with that key or remove it from ColumnsKey collection'
-                );
+        let absentKey = "";
 
-            columns.push(columnsMap.get(key));
+        orderedColumnKeys.forEach((key) => {
+            if (!columnsMap.has(key)) {
+                absentKey += key + ', ';
+            }
+            else {
+                columns.push(columnsMap.get(key));
+            }
         });
+
+        if(absentKey !== ""){
+            throw (
+                'Can not create column settings with key(s):' +
+                absentKey +
+                ', add TableColumnSettings with that key(s) or remove it from OrderedColumnsKey collection.'
+            );
+        }
 
         return columns;
     }
@@ -104,7 +160,9 @@ export class ColumnBuilderService {
         sortOptions: FirstSortingSettings
     ): void {
         columns.forEach((column) => {
-            if (column.allowSorting !== false) column.allowSorting = true;
+            if (column.allowSorting !== false){
+                column.allowSorting = true;
+            } 
 
             if (sortOptions !== null && column.key === sortOptions.columnKey) {
                 column.sortingType = sortOptions.sortingType;

@@ -16,8 +16,8 @@ export class ElementsTableSettings extends BaseTableSetttingsService{
             ElementsTableColumnKeys.Name,
             ElementsTableColumnKeys.Weight,
             ElementsTableColumnKeys.Symbol,
-        ];
-    
+        ];    
+
         return columnKeys;
 
     }
@@ -50,7 +50,7 @@ export class ElementsTableSettings extends BaseTableSetttingsService{
                 templateName: CellTemplateTypes.Text,
             } as TableColumnSettings,
         ];
-    
+        
         return columnSettings;
     }
 

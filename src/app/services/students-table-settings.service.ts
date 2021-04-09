@@ -51,7 +51,7 @@ export class StudentsTableSettings extends BaseTableSetttingsService {
             templateName: CellTemplateTypes.Text,
         } as TableColumnSettings,
     ];
-
+    
     return columnSettings;
   }
 
