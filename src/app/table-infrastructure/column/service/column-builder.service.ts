@@ -9,7 +9,7 @@ export class ColumnBuilderService {
     private filterOptions = new TableFilterOptions();
 
 
-    public getshowColumnFiltersRow(): boolean{
+    public getShowColumnFiltersRow(): boolean{
         return this.showColumnFiltersRow;
     }
 

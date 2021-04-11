@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HtmlTableColumnSettings } from '../table-infrastructure/column/models/column-settings.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { HtmlTableColumnSettings } from '../table-infrastructure/column/models/c
   templateUrl: './column-table.component.html',
   styleUrls: ['./column-table.component.less']
 })
-export class ColumnTableComponent implements OnInit {
+export class ColumnTableComponent{
 
   @Input()
   public column: HtmlTableColumnSettings;
@@ -16,11 +16,6 @@ export class ColumnTableComponent implements OnInit {
 
   @Input()
   public rowIndex: number;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
 

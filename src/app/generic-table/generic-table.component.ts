@@ -18,11 +18,6 @@ export class GenericTableComponent implements AfterViewInit {
   @Input()
   public tableData: any[];
 
-  @Input()
-  public tableSettings: BaseTableSetttingsService;
-
-  @Output()
-  public onSortingChange = new EventEmitter<HtmlTableColumnSettings>();
 
   @Output()
   public onFilterChange = new EventEmitter<HtmlTableColumnSettings>();
@@ -33,6 +28,9 @@ export class GenericTableComponent implements AfterViewInit {
     }
   }
 
+  @Input()
+  public tableSettings: BaseTableSetttingsService;
+
   public searchEvent(event: any, column: HtmlTableColumnSettings): void {
     if (!column.allowFiltering) return;
 
@@ -42,6 +40,10 @@ export class GenericTableComponent implements AfterViewInit {
       this.onFilterChange.emit(column);
     }
   }
+
+  @Output()
+  public onSortingChange = new EventEmitter<HtmlTableColumnSettings>();
+
 
   public columnClick(column: HtmlTableColumnSettings): void {
     if (!column.allowSorting) return;

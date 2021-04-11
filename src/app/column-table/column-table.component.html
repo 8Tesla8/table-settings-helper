@@ -1,4 +1,5 @@
-<div *ngIf="column.templateName === 'rowNumberTemplate'" class="number">
+<div *ngIf="column.templateName === 'rowNumberTemplate'" 
+class="number">
     {{ rowIndex + 1 }}
 </div>
 
@@ -6,6 +7,7 @@
     {{ data[column.dataPropName] }}
 </div>
 
-<div *ngIf="column.templateName === 'numberTemplate'" class="number">
+<div *ngIf="column.templateName === 'numberTemplate'" 
+class="number">
     {{ data[column.dataPropName] }}
 </div>

@@ -6,6 +6,8 @@ import { TableColumnFilterSettings } from "../filter/models/filter-column-settin
 export abstract class BaseTableSetttingsService {
     private columnSettings: HtmlTableColumnSettings[];
     private columnBuilderService = new ColumnBuilderService();
+    private allowDuplicates = false;
+
 
     //methods for override
 
@@ -21,13 +23,21 @@ export abstract class BaseTableSetttingsService {
 
     // end methods for override
 
+    public getAllowDuplicatesCollumns(): boolean {
+        return this.allowDuplicates;
+    }
+
+    public setAllowDuplicatesCollumns(value: boolean): void {
+        this.allowDuplicates = value;
+    }
 
     public setTableSettings(): void {
         this.columnSettings = this.columnBuilderService.createColumns(
             this.getOrderedColumnKeys(),
             this.getColumnSettings(),
             this.getFirstSortingSettings(),
-            this.getFilterColumnSettings()
+            this.getFilterColumnSettings(),
+            this.allowDuplicates
         );
     }
 
@@ -36,7 +46,6 @@ export abstract class BaseTableSetttingsService {
     }
 
     public showFilterRow(): boolean {
-        return this.columnBuilderService.getshowColumnFiltersRow();
+        return this.columnBuilderService.getShowColumnFiltersRow();
     }
-
 }

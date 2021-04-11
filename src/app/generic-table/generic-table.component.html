@@ -3,7 +3,8 @@
     <th *ngFor="let column of tableSettings.getTableColumnSettings()"
     [ngStyle]="{'width':column.width}"
     > 
-      <div (click)="columnClick(column)" [ngStyle]="{'margin-top':titleMargin(column)}">
+      <div (click)="columnClick(column)" 
+      [ngStyle]="{'margin-top':titleMargin(column)}">
         {{column.title}} 
 
         <span *ngIf="column.sortingType ===  'asc'"> ▲</span>
@@ -20,7 +21,8 @@
   <tr *ngFor="let data of tableData; index as i">
     <td *ngFor="let column of tableSettings.getTableColumnSettings()">
 
-      <app-column-table [rowIndex]="i" [column]="column" [data]="data"></app-column-table>
+      <app-column-table [rowIndex]="i" [column]="column" [data]="data">
+      </app-column-table>
 
     </td>
   </tr>
